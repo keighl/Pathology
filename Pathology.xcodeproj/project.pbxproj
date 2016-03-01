@@ -1,0 +1,607 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CF990DB01C85FE0000183453 /* Pathology.h in Headers */ = {isa = PBXBuildFile; fileRef = CF990DAF1C85FE0000183453 /* Pathology.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CF990DB71C85FE0000183453 /* Pathology.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF990DAC1C85FE0000183453 /* Pathology.framework */; };
+		CF990DBC1C85FE0000183453 /* PathologyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF990DBB1C85FE0000183453 /* PathologyTests.swift */; };
+		CF990DC71C85FE4400183453 /* Pathology.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF990DC61C85FE4400183453 /* Pathology.swift */; };
+		CF990DD51C86486E00183453 /* Pathology.h in Headers */ = {isa = PBXBuildFile; fileRef = CF990DAF1C85FE0000183453 /* Pathology.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CF990DD61C86486E00183453 /* Pathology.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF990DC61C85FE4400183453 /* Pathology.swift */; };
+		CF990DED1C8648E000183453 /* Pathology.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF990DCD1C86475500183453 /* Pathology.framework */; };
+		CF990DF31C86495200183453 /* PathologyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF990DBB1C85FE0000183453 /* PathologyTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CF990DB81C85FE0000183453 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CF990DA31C85FDFF00183453 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CF990DAB1C85FE0000183453;
+			remoteInfo = Pathology;
+		};
+		CF990DEE1C8648E000183453 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CF990DA31C85FDFF00183453 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CF990DCC1C86475500183453;
+			remoteInfo = "Pathology OSX";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CF990DAC1C85FE0000183453 /* Pathology.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pathology.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF990DAF1C85FE0000183453 /* Pathology.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pathology.h; sourceTree = "<group>"; };
+		CF990DB11C85FE0000183453 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CF990DB61C85FE0000183453 /* PathologyTests_iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PathologyTests_iOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF990DBB1C85FE0000183453 /* PathologyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathologyTests.swift; sourceTree = "<group>"; };
+		CF990DBD1C85FE0000183453 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CF990DC61C85FE4400183453 /* Pathology.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pathology.swift; sourceTree = "<group>"; };
+		CF990DCD1C86475500183453 /* Pathology.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pathology.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF990DE31C8648B900183453 /* PathologyTests_iOS copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "PathologyTests_iOS copy-Info.plist"; path = "/Users/keighl/ios/Pathology/PathologyTests_iOS copy-Info.plist"; sourceTree = "<absolute>"; };
+		CF990DE81C8648E000183453 /* PathologyTests_OSX.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PathologyTests_OSX.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CF990DA81C85FE0000183453 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF990DB31C85FE0000183453 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF990DB71C85FE0000183453 /* Pathology.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF990DC91C86475500183453 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF990DE51C8648E000183453 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF990DED1C8648E000183453 /* Pathology.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CF990DA21C85FDFF00183453 = {
+			isa = PBXGroup;
+			children = (
+				CF990DAE1C85FE0000183453 /* Source */,
+				CF990DBA1C85FE0000183453 /* Tests */,
+				CF990DAD1C85FE0000183453 /* Products */,
+				CF990DE31C8648B900183453 /* PathologyTests_iOS copy-Info.plist */,
+			);
+			sourceTree = "<group>";
+		};
+		CF990DAD1C85FE0000183453 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CF990DAC1C85FE0000183453 /* Pathology.framework */,
+				CF990DB61C85FE0000183453 /* PathologyTests_iOS.xctest */,
+				CF990DCD1C86475500183453 /* Pathology.framework */,
+				CF990DE81C8648E000183453 /* PathologyTests_OSX.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CF990DAE1C85FE0000183453 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				CF990DAF1C85FE0000183453 /* Pathology.h */,
+				CF990DB11C85FE0000183453 /* Info.plist */,
+				CF990DC61C85FE4400183453 /* Pathology.swift */,
+			);
+			name = Source;
+			path = Pathology;
+			sourceTree = "<group>";
+		};
+		CF990DBA1C85FE0000183453 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				CF990DBB1C85FE0000183453 /* PathologyTests.swift */,
+				CF990DBD1C85FE0000183453 /* Info.plist */,
+			);
+			name = Tests;
+			path = PathologyTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		CF990DA91C85FE0000183453 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF990DB01C85FE0000183453 /* Pathology.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF990DCA1C86475500183453 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF990DD51C86486E00183453 /* Pathology.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		CF990DAB1C85FE0000183453 /* Pathology iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF990DC01C85FE0000183453 /* Build configuration list for PBXNativeTarget "Pathology iOS" */;
+			buildPhases = (
+				CF990DA71C85FE0000183453 /* Sources */,
+				CF990DA81C85FE0000183453 /* Frameworks */,
+				CF990DA91C85FE0000183453 /* Headers */,
+				CF990DAA1C85FE0000183453 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pathology iOS";
+			productName = Pathology;
+			productReference = CF990DAC1C85FE0000183453 /* Pathology.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		CF990DB51C85FE0000183453 /* PathologyTests_iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF990DC31C85FE0000183453 /* Build configuration list for PBXNativeTarget "PathologyTests_iOS" */;
+			buildPhases = (
+				CF990DB21C85FE0000183453 /* Sources */,
+				CF990DB31C85FE0000183453 /* Frameworks */,
+				CF990DB41C85FE0000183453 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CF990DB91C85FE0000183453 /* PBXTargetDependency */,
+			);
+			name = PathologyTests_iOS;
+			productName = PathologyTests;
+			productReference = CF990DB61C85FE0000183453 /* PathologyTests_iOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		CF990DCC1C86475500183453 /* Pathology OSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF990DD41C86475500183453 /* Build configuration list for PBXNativeTarget "Pathology OSX" */;
+			buildPhases = (
+				CF990DC81C86475500183453 /* Sources */,
+				CF990DC91C86475500183453 /* Frameworks */,
+				CF990DCA1C86475500183453 /* Headers */,
+				CF990DCB1C86475500183453 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pathology OSX";
+			productName = Pathology;
+			productReference = CF990DCD1C86475500183453 /* Pathology.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		CF990DE71C8648E000183453 /* PathologyTests_OSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF990DF01C8648E000183453 /* Build configuration list for PBXNativeTarget "PathologyTests_OSX" */;
+			buildPhases = (
+				CF990DE41C8648E000183453 /* Sources */,
+				CF990DE51C8648E000183453 /* Frameworks */,
+				CF990DE61C8648E000183453 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CF990DEF1C8648E000183453 /* PBXTargetDependency */,
+			);
+			name = PathologyTests_OSX;
+			productName = PathologyTests_OSX;
+			productReference = CF990DE81C8648E000183453 /* PathologyTests_OSX.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CF990DA31C85FDFF00183453 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = keighl;
+				TargetAttributes = {
+					CF990DAB1C85FE0000183453 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+					CF990DB51C85FE0000183453 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+					CF990DCC1C86475500183453 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+					CF990DE71C8648E000183453 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+				};
+			};
+			buildConfigurationList = CF990DA61C85FDFF00183453 /* Build configuration list for PBXProject "Pathology" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CF990DA21C85FDFF00183453;
+			productRefGroup = CF990DAD1C85FE0000183453 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CF990DAB1C85FE0000183453 /* Pathology iOS */,
+				CF990DB51C85FE0000183453 /* PathologyTests_iOS */,
+				CF990DCC1C86475500183453 /* Pathology OSX */,
+				CF990DE71C8648E000183453 /* PathologyTests_OSX */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CF990DAA1C85FE0000183453 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF990DB41C85FE0000183453 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF990DCB1C86475500183453 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF990DE61C8648E000183453 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CF990DA71C85FE0000183453 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF990DC71C85FE4400183453 /* Pathology.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF990DB21C85FE0000183453 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF990DBC1C85FE0000183453 /* PathologyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF990DC81C86475500183453 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF990DD61C86486E00183453 /* Pathology.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF990DE41C8648E000183453 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF990DF31C86495200183453 /* PathologyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CF990DB91C85FE0000183453 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CF990DAB1C85FE0000183453 /* Pathology iOS */;
+			targetProxy = CF990DB81C85FE0000183453 /* PBXContainerItemProxy */;
+		};
+		CF990DEF1C8648E000183453 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CF990DCC1C86475500183453 /* Pathology OSX */;
+			targetProxy = CF990DEE1C8648E000183453 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		CF990DBE1C85FE0000183453 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		CF990DBF1C85FE0000183453 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		CF990DC11C85FE0000183453 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Pathology/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.keighl.Pathology;
+				PRODUCT_NAME = Pathology;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CF990DC21C85FE0000183453 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Pathology/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.keighl.Pathology;
+				PRODUCT_NAME = Pathology;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		CF990DC41C85FE0000183453 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = PathologyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.keighl.PathologyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		CF990DC51C85FE0000183453 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = PathologyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.keighl.PathologyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		CF990DD21C86475500183453 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = Pathology/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = com.keighl.Pathology;
+				PRODUCT_NAME = Pathology;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		CF990DD31C86475500183453 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = Pathology/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = com.keighl.Pathology;
+				PRODUCT_NAME = Pathology;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		CF990DF11C8648E000183453 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = PathologyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.keighl.PathologyTests-OSX";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		CF990DF21C8648E000183453 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = PathologyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.keighl.PathologyTests-OSX";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CF990DA61C85FDFF00183453 /* Build configuration list for PBXProject "Pathology" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF990DBE1C85FE0000183453 /* Debug */,
+				CF990DBF1C85FE0000183453 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CF990DC01C85FE0000183453 /* Build configuration list for PBXNativeTarget "Pathology iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF990DC11C85FE0000183453 /* Debug */,
+				CF990DC21C85FE0000183453 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CF990DC31C85FE0000183453 /* Build configuration list for PBXNativeTarget "PathologyTests_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF990DC41C85FE0000183453 /* Debug */,
+				CF990DC51C85FE0000183453 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CF990DD41C86475500183453 /* Build configuration list for PBXNativeTarget "Pathology OSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF990DD21C86475500183453 /* Debug */,
+				CF990DD31C86475500183453 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		CF990DF01C8648E000183453 /* Build configuration list for PBXNativeTarget "PathologyTests_OSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF990DF11C8648E000183453 /* Debug */,
+				CF990DF21C8648E000183453 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CF990DA31C85FDFF00183453 /* Project object */;
+}

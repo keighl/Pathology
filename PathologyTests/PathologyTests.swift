@@ -99,7 +99,6 @@ class PathologyTests: XCTestCase {
         let elements = Pathology.extract(testPath)
         do {
             let marshaledData = try NSJSONSerialization.dataWithJSONObject(elements.raw(), options: NSJSONWritingOptions.PrettyPrinted)
-            print(NSString(data: marshaledData, encoding: NSUTF8StringEncoding))
             let unmarshaledData = try NSJSONSerialization.JSONObjectWithData(marshaledData, options: [])
             if let ud = unmarshaledData as? [[String: AnyObject]] {
                 let parsedElements = Pathology.parseRawPathData(ud)
@@ -111,7 +110,36 @@ class PathologyTests: XCTestCase {
         } catch {
             XCTFail("\(error)")
         }
+    }
     
+    func testReadmeExample() {
+        let bezierPath = UIBezierPath(
+            roundedRect: CGRect(x: 50, y: 50, width: 200, height: 200),
+            cornerRadius: 10)
+        
+        let pathElements = Pathology.extract(bezierPath.CGPath)
+        for el in pathElements.data {
+            print("\(el.type)")
+            for point in el.points {
+                    print("\t \(point)")
+            }
+        }
+        
+        
+//        do {
+//            let marshaledData = try NSJSONSerialization.dataWithJSONObject(elements.raw(), options: NSJSONWritingOptions.PrettyPrinted)
+//            print(NSString(data: marshaledData, encoding: NSUTF8StringEncoding))
+//            let unmarshaledData = try NSJSONSerialization.JSONObjectWithData(marshaledData, options: [])
+//            if let ud = unmarshaledData as? [[String: AnyObject]] {
+//                let parsedElements = Pathology.parseRawPathData(ud)
+//                XCTAssert(CGPathEqualToPath(testPath, parsedElements.buildPath()), "Build path doesn't match")
+//            } else {
+//                XCTFail("Couldn't parse unmarshaled JSON")
+//            }
+//            
+//        } catch {
+//            XCTFail("\(error)")
+//        }
     }
     
 }

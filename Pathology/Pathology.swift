@@ -20,12 +20,7 @@ func pathApply(path: CGPath!, block: PathApplier) {
     CGPathApply(path, unsafeBitCast(block, UnsafeMutablePointer<Void>.self), unsafeBitCast(callback, CGPathApplierFunction.self))
 }
 
-public enum PathologyError: ErrorType {
-    case InvalidPathElementJSONData
-    case InvalidPathElement
-}
-
-public enum PathElementType : String {
+public enum PTHElementType : String {
     case Invalid = ""
     case MoveToPoint = "moveToPoint"
     case AddLineToPoint = "addLineToPoint"
@@ -34,18 +29,18 @@ public enum PathElementType : String {
     case CloseSubpath = "closeSubpath"
 }
 
-public struct PathElements {
-    var data: [PathElementData] = []
+public struct PTHPath {
+    var elements: [PTHElement] = []
     
-    func raw() -> [[String: AnyObject]] {
-        return data.map({el in
-            return el.raw()
+    func toArray() -> [[String: AnyObject]] {
+        return elements.map({el in
+            return el.toDictionary()
         })
     }
     
-    func buildPath() -> CGPath {
+    func CGPath() -> QuartzCore.CGPath {
         let path = CGPathCreateMutable()
-        for el in data {
+        for el in elements {
             let endPoint = el.endPoint()
             let ctrl1 = el.ctrlPoint1()
             let ctrl2 = el.ctrlPoint2()
@@ -73,11 +68,19 @@ public struct PathElements {
     }
 }
 
-public struct PathElementData {
-    var type: PathElementType = .Invalid
+extension PTHPath {
+    public init(data: [[String: AnyObject]]) {
+        self.elements = data.map({ el in
+            return PTHElement(data: el)
+        })
+    }
+}
+
+public struct PTHElement {
+    var type: PTHElementType = .Invalid
     var points: [CGPoint] = []
     
-    public func raw() -> [String: AnyObject] {
+    public func toDictionary() -> [String: AnyObject] {
         return [
             "type": type.rawValue,
             "points": points.map({point in
@@ -108,14 +111,14 @@ public struct PathElementData {
     }
 }
 
-extension PathElementData {
-    public init(rawDictionary: [String: AnyObject]) {
-        if let type = rawDictionary["type"] as? String {
-            if let ptype = PathElementType(rawValue: type) {
+extension PTHElement {
+    public init(data: [String: AnyObject]) {
+        if let type = data["type"] as? String {
+            if let ptype = PTHElementType(rawValue: type) {
                 self.type = ptype
             }
         }
-        if let points = rawDictionary["points"] as? [[CGFloat]] {
+        if let points = data["points"] as? [[CGFloat]] {
             self.points = points.map({pt in
                 return CGPointMake(pt[0], pt[1])
             })
@@ -125,39 +128,39 @@ extension PathElementData {
 
 public class Pathology {
     
-    public class func extract(path: CGPath) -> PathElements {
-        var elementsData = PathElements(data: [])
+    public class func extract(path: CGPath) -> PTHPath {
+        var pathData = PTHPath(elements: [])
         pathApply(path) { element in
             switch (element.memory.type) {
             case CGPathElementType.MoveToPoint:
-                elementsData.data.append(PathElementData(type: .MoveToPoint, points: [
+                pathData.elements.append(PTHElement(type: .MoveToPoint, points: [
                     element.memory.points[0]
                 ]))
             case .AddLineToPoint:
-                elementsData.data.append(PathElementData(type: .AddLineToPoint, points: [
+                pathData.elements.append(PTHElement(type: .AddLineToPoint, points: [
                     element.memory.points[0],
                 ]))
             case .AddQuadCurveToPoint:
-                elementsData.data.append(PathElementData(type: .AddQuadCurveToPoint, points: [
+                pathData.elements.append(PTHElement(type: .AddQuadCurveToPoint, points: [
                     element.memory.points[1], // end pt
                     element.memory.points[0], // ctlpr pt
                 ]))
             case .AddCurveToPoint:
-                elementsData.data.append(PathElementData(type: .AddCurveToPoint, points: [
+                pathData.elements.append(PTHElement(type: .AddCurveToPoint, points: [
                     element.memory.points[2], // end pt
                     element.memory.points[0], // ctlpr 1
                     element.memory.points[1], // ctlpr 2
                 ]))
             case .CloseSubpath:
-                elementsData.data.append(PathElementData(type: .CloseSubpath, points: []))
+                pathData.elements.append(PTHElement(type: .CloseSubpath, points: []))
             }
         }
-        return elementsData
+        return pathData
     }
     
-    public class func parseRawPathData(data: [[String: AnyObject]]) -> PathElements {
-        return PathElements(data: data.map({ el in
-            return PathElementData(rawDictionary: el)
+    public class func parseRawPathData(data: [[String: AnyObject]]) -> PTHPath {
+        return PTHPath(elements: data.map({ el in
+            return PTHElement(data: el)
         }))
     }
 }

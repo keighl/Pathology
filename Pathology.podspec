@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'Pathology'
-  s.version = '1.0.0'
+  s.version = '0.1.0'
   s.license = 'MIT'
   s.summary = 'A library for encoding/decoding CGPath data'
   s.homepage = 'https://github.com/keighl/Pathology'

@@ -58,8 +58,13 @@ do {
 Result &darr;
 
 ```json
-[{"points":[[50,50]],"type":"moveToPoint"},{"points":[[250,50]],"type":"addLineToPoint"},{"points":[[250,250]],"type":"addLineToPoint"},{"points":[[50,250]],"type":"addLineToPoint"},{"points":[],"type":"closeSubpath"}])
-/Users/keighl/ios/Pathology/PathologyTests/PathologyTests.swift:80: error: -[PathologyTests_iOS.PathologyTests test_Path_ToJSON] : XCTAssertEqual failed: ("Optional([{"points":[[50,50]],"type":"moveToPoint"},{"points":[[250,50]],"type":"addLineToPoint"},{"points":[[250,250]],"type":"addLineToPoint"},{"points":[[50,250]],"type":"addLineToPoint"},{"points":[],"type":"closeSubpath"}]
+[
+  {"points":[[50,50]],"type":"moveToPoint"},
+  {"points":[[250,50]],"type":"addLineToPoint"},
+  {"points":[[250,250]],"type":"addLineToPoint"},
+  {"points":[[50,250]],"type":"addLineToPoint"},
+  {"points":[],"type":"closeSubpath"}
+]
 ```
 
 ### Decode JSON

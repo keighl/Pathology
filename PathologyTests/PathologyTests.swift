@@ -34,54 +34,93 @@ class PathologyTests: XCTestCase {
     
     func test_Extract() {
         let pathData = Pathology.extract(testPath)
-        XCTAssertEqual(pathData.elements[0].type, PTHElementType.MoveToPoint)
+        XCTAssertEqual(pathData.elements[0].type, ElementType.MoveToPoint)
         XCTAssertEqual(pathData.elements[0].points, [CGPointMake(0, 0)])
-        XCTAssertEqual(pathData.elements[1].type, PTHElementType.AddCurveToPoint)
+        XCTAssertEqual(pathData.elements[1].type, ElementType.AddCurveToPoint)
         XCTAssertEqual(pathData.elements[1].points, [CGPointMake(75, 25), CGPointMake(50, 25), CGPointMake(70, 10)])
-        XCTAssertEqual(pathData.elements[2].type, PTHElementType.AddLineToPoint)
+        XCTAssertEqual(pathData.elements[2].type, ElementType.AddLineToPoint)
         XCTAssertEqual(pathData.elements[2].points, [CGPointMake(50, 50)])
-        XCTAssertEqual(pathData.elements[3].type, PTHElementType.AddQuadCurveToPoint)
+        XCTAssertEqual(pathData.elements[3].type, ElementType.AddQuadCurveToPoint)
         XCTAssertEqual(pathData.elements[3].points, [CGPointMake(74, 75), CGPointMake(75, 150)])
-        XCTAssertEqual(pathData.elements[4].type, PTHElementType.AddLineToPoint)
+        XCTAssertEqual(pathData.elements[4].type, ElementType.AddLineToPoint)
         XCTAssertEqual(pathData.elements[4].points, [CGPointMake(0, 0)])
-        XCTAssertEqual(pathData.elements[5].type, PTHElementType.CloseSubpath)
+        XCTAssertEqual(pathData.elements[5].type, ElementType.CloseSubpath)
         XCTAssertEqual(pathData.elements[5].points, [])
     }
     
+    ////////
+    
     func test_Path_ToArray() {
-        let pathData = PTHPath(elements: [PTHElement(type: PTHElementType.AddLineToPoint, points: [CGPointMake(100, 100)])])
+        let pathData = Path(elements: [Element(type: ElementType.AddLineToPoint, points: [CGPointMake(100, 100)])])
         let result = pathData.toArray()
         XCTAssertEqual(result.count, 1)
-        XCTAssertEqual(result[0]["type"] as? String, PTHElementType.AddLineToPoint.rawValue)
+        XCTAssertEqual(result[0]["type"] as? String, ElementType.AddLineToPoint.rawValue)
         XCTAssertEqual((result[0]["points"] as? [[CGFloat]])!, [[100, 100]])
     }
     
-    func test_Element_ToDictionary() {
-        let elementData = PTHElement(type: PTHElementType.AddLineToPoint, points: [CGPointMake(100, 100)])
-        let result = elementData.toDictionary()
-        XCTAssertEqual(result["type"] as? String, PTHElementType.AddLineToPoint.rawValue)
-        XCTAssertEqual((result["points"] as? [[CGFloat]])!, [[100, 100]])
+    func test_Path_ToJSON() {
+        let pathData = Path(
+            elements: [
+                Element(type: ElementType.AddLineToPoint, points: [CGPointMake(100, 100)])
+            ])
+        do {
+            let result = try pathData.toJSON(NSJSONWritingOptions(rawValue: 0))
+            let resultString = NSString(data: result, encoding: NSUTF8StringEncoding)
+            let expected = "[{\"points\":[[100,100]],\"type\":\"addLineToPoint\"}]"
+            XCTAssertEqual(resultString, expected)
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+    
+    func test_Path_FromJSON() {
+        let JSON = testPathJSON.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
+        if let pathData = Path(JSON: JSON) {
+            XCTAssertEqual(pathData.elements[0].type, ElementType.MoveToPoint)
+            XCTAssertEqual(pathData.elements[0].points, [CGPointMake(0, 0)])
+            XCTAssertEqual(pathData.elements[1].type, ElementType.AddCurveToPoint)
+            XCTAssertEqual(pathData.elements[1].points, [CGPointMake(75, 25), CGPointMake(50, 25), CGPointMake(70, 10)])
+            XCTAssertEqual(pathData.elements[2].type, ElementType.AddLineToPoint)
+            XCTAssertEqual(pathData.elements[2].points, [CGPointMake(50, 50)])
+            XCTAssertEqual(pathData.elements[3].type, ElementType.AddQuadCurveToPoint)
+            XCTAssertEqual(pathData.elements[3].points, [CGPointMake(74, 75), CGPointMake(75, 150)])
+            XCTAssertEqual(pathData.elements[4].type, ElementType.AddLineToPoint)
+            XCTAssertEqual(pathData.elements[4].points, [CGPointMake(0, 0)])
+            XCTAssertEqual(pathData.elements[5].type, ElementType.CloseSubpath)
+            XCTAssertEqual(pathData.elements[5].points, [])
+            XCTAssertEqual(pathData.elements[6].type, ElementType.Invalid)
+            XCTAssertEqual(pathData.elements[6].points, [])
+        } else {
+            XCTFail()
+        }
+    }
+    
+    func test_Path_FromJSON_Fail() {
+        let JSON = "CHEESE".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
+        if let _ = Path(JSON: JSON) {
+            XCTFail("Shoulda failed!")
+        }
     }
     
     func test_Path_FromData() {
         let data = testPathJSON.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
         do {
             if let jsonArray = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? [[String: AnyObject]] {
-                let pathData = PTHPath(data: jsonArray)
+                let pathData = Path(data: jsonArray)
                 
-                XCTAssertEqual(pathData.elements[0].type, PTHElementType.MoveToPoint)
+                XCTAssertEqual(pathData.elements[0].type, ElementType.MoveToPoint)
                 XCTAssertEqual(pathData.elements[0].points, [CGPointMake(0, 0)])
-                XCTAssertEqual(pathData.elements[1].type, PTHElementType.AddCurveToPoint)
+                XCTAssertEqual(pathData.elements[1].type, ElementType.AddCurveToPoint)
                 XCTAssertEqual(pathData.elements[1].points, [CGPointMake(75, 25), CGPointMake(50, 25), CGPointMake(70, 10)])
-                XCTAssertEqual(pathData.elements[2].type, PTHElementType.AddLineToPoint)
+                XCTAssertEqual(pathData.elements[2].type, ElementType.AddLineToPoint)
                 XCTAssertEqual(pathData.elements[2].points, [CGPointMake(50, 50)])
-                XCTAssertEqual(pathData.elements[3].type, PTHElementType.AddQuadCurveToPoint)
+                XCTAssertEqual(pathData.elements[3].type, ElementType.AddQuadCurveToPoint)
                 XCTAssertEqual(pathData.elements[3].points, [CGPointMake(74, 75), CGPointMake(75, 150)])
-                XCTAssertEqual(pathData.elements[4].type, PTHElementType.AddLineToPoint)
+                XCTAssertEqual(pathData.elements[4].type, ElementType.AddLineToPoint)
                 XCTAssertEqual(pathData.elements[4].points, [CGPointMake(0, 0)])
-                XCTAssertEqual(pathData.elements[5].type, PTHElementType.CloseSubpath)
+                XCTAssertEqual(pathData.elements[5].type, ElementType.CloseSubpath)
                 XCTAssertEqual(pathData.elements[5].points, [])
-                XCTAssertEqual(pathData.elements[6].type, PTHElementType.Invalid)
+                XCTAssertEqual(pathData.elements[6].type, ElementType.Invalid)
                 XCTAssertEqual(pathData.elements[6].points, [])
             }
         } catch {
@@ -95,20 +134,28 @@ class PathologyTests: XCTestCase {
         XCTAssert(CGPathEqualToPath(testPath, builtPath), "Build path doesn't match")
     }
     
-    func test_JSON_EndToEnd() {
-        let pathData = Pathology.extract(testPath)
+    ////////
+    
+    func test_Element_ToDictionary() {
+        let elementData = Element(type: ElementType.AddLineToPoint, points: [CGPointMake(100, 100)])
+        let result = elementData.toDictionary()
+        XCTAssertEqual(result["type"] as? String, ElementType.AddLineToPoint.rawValue)
+        XCTAssertEqual((result["points"] as? [[CGFloat]])!, [[100, 100]])
+    }
+    
+    func test_Element_ToJSON() {
+        let elementData = Element(type: .AddLineToPoint, points: [CGPointMake(100, 100)])
         do {
-            let marshaledData = try NSJSONSerialization.dataWithJSONObject(pathData.toArray(), options: NSJSONWritingOptions.PrettyPrinted)
-            let unmarshaledData = try NSJSONSerialization.JSONObjectWithData(marshaledData, options: [])
-            if let ud = unmarshaledData as? [[String: AnyObject]] {
-                let parsedElements = Pathology.parseRawPathData(ud)
-                XCTAssert(CGPathEqualToPath(testPath, parsedElements.CGPath()), "Build path doesn't match")
-            } else {
-                XCTFail("Couldn't parse unmarshaled JSON")
-            }
-            
+            let result = try elementData.toJSON(NSJSONWritingOptions(rawValue: 0))
+            let resultString = NSString(data: result, encoding: NSUTF8StringEncoding)
+            let expected = "{\"points\":[[100,100]],\"type\":\"addLineToPoint\"}"
+            XCTAssertEqual(resultString, expected)
         } catch {
             XCTFail("\(error)")
         }
+    }
+    
+    func test_thing() {
+        
     }
 }

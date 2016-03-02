@@ -51,12 +51,6 @@ public class Pathology {
         }
         return pathData
     }
-    
-    public class func parseRawPathData(data: [[String: AnyObject]]) -> Path {
-        return Path(elements: data.map({ el in
-            return Element(dictionary: el)
-        }))
-    }
 }
 
 

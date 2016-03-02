@@ -20,38 +20,36 @@ func pathApply(path: CGPath!, block: PathApplier) {
     CGPathApply(path, unsafeBitCast(block, UnsafeMutablePointer<Void>.self), unsafeBitCast(callback, CGPathApplierFunction.self))
 }
 
-public class Pathology {
-    
-    public class func extract(path: CGPath) -> Path {
-        var pathData = Path(elements: [])
-        pathApply(path) { element in
-            switch (element.memory.type) {
-            case CGPathElementType.MoveToPoint:
-                pathData.elements.append(Element(type: .MoveToPoint, points: [
-                    element.memory.points[0]
-                ]))
-            case .AddLineToPoint:
-                pathData.elements.append(Element(type: .AddLineToPoint, points: [
-                    element.memory.points[0],
-                ]))
-            case .AddQuadCurveToPoint:
-                pathData.elements.append(Element(type: .AddQuadCurveToPoint, points: [
-                    element.memory.points[1], // end pt
-                    element.memory.points[0], // ctlpr pt
-                ]))
-            case .AddCurveToPoint:
-                pathData.elements.append(Element(type: .AddCurveToPoint, points: [
-                    element.memory.points[2], // end pt
-                    element.memory.points[0], // ctlpr 1
-                    element.memory.points[1], // ctlpr 2
-                ]))
-            case .CloseSubpath:
-                pathData.elements.append(Element(type: .CloseSubpath, points: []))
-            }
+public func extract(path: CGPath) -> Path {
+    var pathData = Path(elements: [])
+    pathApply(path) { element in
+        switch (element.memory.type) {
+        case CGPathElementType.MoveToPoint:
+            pathData.elements.append(Element(type: .MoveToPoint, points: [
+                element.memory.points[0]
+            ]))
+        case .AddLineToPoint:
+            pathData.elements.append(Element(type: .AddLineToPoint, points: [
+                element.memory.points[0],
+            ]))
+        case .AddQuadCurveToPoint:
+            pathData.elements.append(Element(type: .AddQuadCurveToPoint, points: [
+                element.memory.points[1], // end pt
+                element.memory.points[0], // ctlpr pt
+            ]))
+        case .AddCurveToPoint:
+            pathData.elements.append(Element(type: .AddCurveToPoint, points: [
+                element.memory.points[2], // end pt
+                element.memory.points[0], // ctlpr 1
+                element.memory.points[1], // ctlpr 2
+            ]))
+        case .CloseSubpath:
+            pathData.elements.append(Element(type: .CloseSubpath, points: []))
         }
-        return pathData
     }
+    return pathData
 }
+
 
 
 

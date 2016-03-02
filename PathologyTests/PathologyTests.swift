@@ -22,7 +22,7 @@ class PathologyTests: XCTestCase {
         return path
     }()
     
-    let testPathJSON = "[{\"points\":[[0,0]],\"type\":\"moveToPoint\"},{\"points\":[[75,25],[50,25],[70,10]],\"type\":\"addCurveToPoint\"},{\"points\":[[50,50]],\"type\":\"addLineToPoint\"},{\"points\":[[74,75],[75,150]],\"type\":\"addQuadCurveToPoint\"},{\"points\":[[0,0]],\"type\":\"addLineToPoint\"},{\"points\":[],\"type\":\"closeSubpath\"},{\"points\":[],\"type\":\"INVALID\"}]"
+    let testPathJSON = "[{\"pts\":[[0,0]],\"type\":\"move\"},{\"pts\":[[75,25],[50,25],[70,10]],\"type\":\"curve\"},{\"pts\":[[50,50]],\"type\":\"line\"},{\"pts\":[[74,75],[75,150]],\"type\":\"quad\"},{\"pts\":[[0,0]],\"type\":\"line\"},{\"pts\":[],\"type\":\"close\"},{\"pts\":[],\"type\":\"invalid\"}]"
     
     override func setUp() {
         super.setUp()
@@ -55,7 +55,7 @@ class PathologyTests: XCTestCase {
         let result = pathData.toArray()
         XCTAssertEqual(result.count, 1)
         XCTAssertEqual(result[0]["type"] as? String, ElementType.AddLineToPoint.rawValue)
-        XCTAssertEqual((result[0]["points"] as? [[CGFloat]])!, [[100, 100]])
+        XCTAssertEqual((result[0]["pts"] as? [[CGFloat]])!, [[100, 100]])
     }
     
     func test_Path_ToJSON() {
@@ -66,7 +66,7 @@ class PathologyTests: XCTestCase {
         do {
             let result = try pathData.toJSON(NSJSONWritingOptions(rawValue: 0))
             let resultString = NSString(data: result, encoding: NSUTF8StringEncoding)
-            let expected = "[{\"points\":[[100,100]],\"type\":\"addLineToPoint\"}]"
+            let expected = "[{\"pts\":[[100,100]],\"type\":\"line\"}]"
             XCTAssertEqual(resultString, expected)
         } catch {
             XCTFail("\(error)")
@@ -127,7 +127,7 @@ class PathologyTests: XCTestCase {
             XCTFail("\(error)")
         }
     }
-
+    
     func test_Path_CGPath() {
         let pathData = Pathology.extract(testPath)
         let builtPath = pathData.CGPath()
@@ -140,7 +140,7 @@ class PathologyTests: XCTestCase {
         let elementData = Element(type: ElementType.AddLineToPoint, points: [CGPointMake(100, 100)])
         let result = elementData.toDictionary()
         XCTAssertEqual(result["type"] as? String, ElementType.AddLineToPoint.rawValue)
-        XCTAssertEqual((result["points"] as? [[CGFloat]])!, [[100, 100]])
+        XCTAssertEqual((result["pts"] as? [[CGFloat]])!, [[100, 100]])
     }
     
     func test_Element_ToJSON() {
@@ -148,7 +148,7 @@ class PathologyTests: XCTestCase {
         do {
             let result = try elementData.toJSON(NSJSONWritingOptions(rawValue: 0))
             let resultString = NSString(data: result, encoding: NSUTF8StringEncoding)
-            let expected = "{\"points\":[[100,100]],\"type\":\"addLineToPoint\"}"
+            let expected = "{\"pts\":[[100,100]],\"type\":\"line\"}"
             XCTAssertEqual(resultString, expected)
         } catch {
             XCTFail("\(error)")

@@ -12,7 +12,7 @@ import QuartzCore
 public struct Path {
     var elements: [Element] = []
     
-    func toArray() -> [[String: AnyObject]] {
+    public func toArray() -> [[String: AnyObject]] {
         return elements.map({el in
             return el.toDictionary()
         })
@@ -23,7 +23,7 @@ public struct Path {
         return data
     }
     
-    func CGPath() -> QuartzCore.CGPath {
+    public func CGPath() -> QuartzCore.CGPath {
         let path = CGPathCreateMutable()
         for el in elements {
             let endPoint = el.endPoint()
@@ -52,6 +52,7 @@ public struct Path {
         return path
     }
 }
+
 
 extension Path {
     public init?(JSON: NSData) {

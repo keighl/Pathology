@@ -11,11 +11,11 @@ import QuartzCore
 
 public enum ElementType : String {
     case Invalid = ""
-    case MoveToPoint = "moveToPoint"
-    case AddLineToPoint = "addLineToPoint"
-    case AddQuadCurveToPoint = "addQuadCurveToPoint"
-    case AddCurveToPoint = "addCurveToPoint"
-    case CloseSubpath = "closeSubpath"
+    case MoveToPoint = "move"
+    case AddLineToPoint = "line"
+    case AddQuadCurveToPoint = "quad"
+    case AddCurveToPoint = "curve"
+    case CloseSubpath = "close"
 }
 
 public struct Element {
@@ -25,7 +25,7 @@ public struct Element {
     public func toDictionary() -> [String: AnyObject] {
         return [
             "type": type.rawValue,
-            "points": points.map({point in
+            "pts": points.map({point in
                 return [point.x, point.y]
             })
         ]
@@ -58,6 +58,7 @@ public struct Element {
     }
 }
 
+
 extension Element {
     public init(dictionary: [String: AnyObject]) {
         if let type = dictionary["type"] as? String {
@@ -65,7 +66,7 @@ extension Element {
                 self.type = ptype
             }
         }
-        if let points = dictionary["points"] as? [[CGFloat]] {
+        if let points = dictionary["pts"] as? [[CGFloat]] {
             self.points = points.map({pt in
                 return CGPointMake(pt[0], pt[1])
             })

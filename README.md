@@ -53,6 +53,7 @@ do {
 } catch {
   print("\(error)")
 }
+```
 
 Result &darr;
 
@@ -69,4 +70,5 @@ Expects array payload like encoded result above &uarr;
 if let pathData = Path(JSON: someJSONdata) {
   let bezierPath = UIBezierPath(CGPath: pathData.CGPath())
 }
+```
 

@@ -1,9 +1,17 @@
 # Pathology
 
 [![Build Status](https://travis-ci.org/keighl/Pathology.png?branch=master)](https://travis-ci.org/keighl/Pathology)
+[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Pathology.svg)](https://img.shields.io/cocoapods/v/Pathology.svg)
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![codecov.io](https://codecov.io/github/keighl/Pathology/coverage.svg?branch=master)](https://codecov.io/github/keighl/Pathology?branch=master)
 
 Pathology is a library for encoding/decoding CGPath data.
+
+### Install
+
+```
+pod 'Pathology'
+```
 
 ### Extracting CGPath data
 

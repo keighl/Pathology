@@ -11,46 +11,40 @@ import QuartzCore
 
 typealias PathApplier = @convention(block) (UnsafePointer<CGPathElement>) -> Void
 
-func pathApply(path: CGPath!, block: PathApplier) {
-    let callback: @convention(c) (UnsafeMutablePointer<Void>, UnsafePointer<CGPathElement>) -> Void = { (info, element) in
-        let block = unsafeBitCast(info, PathApplier.self)
+private func apply(to path: CGPath, block: @escaping @convention(block) (UnsafePointer<CGPathElement>) -> Void) {
+    let callback: @convention(c) (UnsafeMutableRawPointer, UnsafePointer<CGPathElement>) -> Void = { (info, element) in
+        let block = unsafeBitCast(info, to: PathApplier.self)
         block(element)
     }
-    
-    CGPathApply(path, unsafeBitCast(block, UnsafeMutablePointer<Void>.self), unsafeBitCast(callback, CGPathApplierFunction.self))
+    path.apply(info: unsafeBitCast(block, to: UnsafeMutableRawPointer.self), function: unsafeBitCast(callback, to: CGPathApplierFunction.self))
 }
 
 public func extract(path: CGPath) -> Path {
     var pathData = Path(elements: [])
-    pathApply(path) { element in
-        switch (element.memory.type) {
-        case CGPathElementType.MoveToPoint:
-            pathData.elements.append(Element(type: .MoveToPoint, points: [
-                element.memory.points[0]
+    apply(to: path) { (element) in
+        switch (element.pointee.type) {
+        case CGPathElementType.moveToPoint:
+            pathData.elements.append(Element(type: .moveToPoint, points: [
+                element.pointee.points[0]
             ]))
-        case .AddLineToPoint:
-            pathData.elements.append(Element(type: .AddLineToPoint, points: [
-                element.memory.points[0],
+        case .addLineToPoint:
+            pathData.elements.append(Element(type: .addLineToPoint, points: [
+                element.pointee.points[0],
             ]))
-        case .AddQuadCurveToPoint:
-            pathData.elements.append(Element(type: .AddQuadCurveToPoint, points: [
-                element.memory.points[1], // end pt
-                element.memory.points[0], // ctlpr pt
+        case .addQuadCurveToPoint:
+            pathData.elements.append(Element(type: .addQuadCurveToPoint, points: [
+                element.pointee.points[1], // end pt
+                element.pointee.points[0], // ctlpr pt
             ]))
-        case .AddCurveToPoint:
-            pathData.elements.append(Element(type: .AddCurveToPoint, points: [
-                element.memory.points[2], // end pt
-                element.memory.points[0], // ctlpr 1
-                element.memory.points[1], // ctlpr 2
+        case .addCurveToPoint:
+            pathData.elements.append(Element(type: .addCurveToPoint, points: [
+                element.pointee.points[2], // end pt
+                element.pointee.points[0], // ctlpr 1
+                element.pointee.points[1], // ctlpr 2
             ]))
-        case .CloseSubpath:
-            pathData.elements.append(Element(type: .CloseSubpath, points: []))
+        case .closeSubpath:
+            pathData.elements.append(Element(type: .closeSubpath, points: []))
         }
     }
     return pathData
 }
-
-
-
-
-

@@ -10,54 +10,53 @@ import Foundation
 import QuartzCore
 
 public enum ElementType : String {
-    case Invalid = ""
-    case MoveToPoint = "move"
-    case AddLineToPoint = "line"
-    case AddQuadCurveToPoint = "quad"
-    case AddCurveToPoint = "curve"
-    case CloseSubpath = "close"
+    case invalid = ""
+    case moveToPoint = "move"
+    case addLineToPoint = "line"
+    case addQuadCurveToPoint = "quad"
+    case addCurveToPoint = "curve"
+    case closeSubpath = "close"
 }
 
 public struct Element {
-    var type: ElementType = .Invalid
+    var type: ElementType = .invalid
     var points: [CGPoint] = []
     
-    public func toDictionary() -> [String: AnyObject] {
+    public var dictionary: [String: Any] {
         return [
-            "type": type.rawValue,
-            "pts": points.map({point in
+            "type": type.rawValue as Any,
+            "pts": points.map {point in
                 return [point.x, point.y]
-            })
+            }
         ]
     }
     
-    public func toJSON(options: NSJSONWritingOptions) throws -> NSData {
-        let data = try NSJSONSerialization.dataWithJSONObject(toDictionary(), options: options)
+    public func toJSON(options: JSONSerialization.WritingOptions) throws -> Data {
+        let data = try JSONSerialization.data(withJSONObject: dictionary, options: options)
         return data
     }
     
-    public func endPoint() -> CGPoint {
+    public var endPoint: CGPoint {
         if points.count >= 1 {
             return points[0]
         }
-        return CGPointZero
+        return .zero
     }
     
-    public func ctrlPoint1() -> CGPoint {
+    public var ctrlPoint1: CGPoint {
         if points.count >= 2 {
             return points[1]
         }
-        return CGPointZero
+        return .zero
     }
     
-    public func ctrlPoint2() -> CGPoint {
+    public var ctrlPoint2: CGPoint {
         if points.count >= 3 {
             return points[2]
         }
-        return CGPointZero
+        return .zero
     }
 }
-
 
 extension Element {
     public init(dictionary: [String: AnyObject]) {
@@ -68,7 +67,7 @@ extension Element {
         }
         if let points = dictionary["pts"] as? [[CGFloat]] {
             self.points = points.map({pt in
-                return CGPointMake(pt[0], pt[1])
+                return CGPoint(x: pt[0], y: pt[1])
             })
         }
     }

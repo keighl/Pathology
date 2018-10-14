@@ -12,40 +12,43 @@ import QuartzCore
 public struct Path {
     var elements: [Element] = []
     
-    public func toArray() -> [[String: AnyObject]] {
-        return elements.map({el in
-            return el.toDictionary()
-        })
+    public var array: [[String: Any]] {
+        return elements.map { (el) in
+            return el.dictionary
+        }
     }
     
-    public func toJSON(options: NSJSONWritingOptions) throws -> NSData {
-        let data = try NSJSONSerialization.dataWithJSONObject(toArray(), options: options)
+    public var json: Data? {
+        return try? json(options: .init(rawValue: 0))
+    }
+    
+    public func json(options: JSONSerialization.WritingOptions) throws -> Data {
+        let data = try JSONSerialization.data(withJSONObject: array, options: options)
         return data
     }
     
-    public func CGPath() -> QuartzCore.CGPath {
-        let path = CGPathCreateMutable()
+    public var cgPath: CGPath {
+        let path = CGMutablePath()
         for el in elements {
-            let endPoint = el.endPoint()
-            let ctrl1 = el.ctrlPoint1()
-            let ctrl2 = el.ctrlPoint2()
-            
             switch el.type {
-            case .MoveToPoint:
-                CGPathMoveToPoint(path, nil, endPoint.x, endPoint.y)
-            case .AddLineToPoint:
-                CGPathAddLineToPoint(path, nil, endPoint.x, endPoint.y)
+            case .moveToPoint:
+                path.move(to: CGPoint(x: el.endPoint.x, y: el.endPoint.y))
+            case .addLineToPoint:
+                path.addLine(to: CGPoint(x: el.endPoint.x, y: el.endPoint.y))
                 break
-            case .AddQuadCurveToPoint:
-                CGPathAddQuadCurveToPoint(path, nil, ctrl1.x, ctrl1.y, endPoint.x, endPoint.y)
+            case .addQuadCurveToPoint:
+                path.addQuadCurve(to:      CGPoint(x: el.ctrlPoint1.x, y: el.ctrlPoint1.y),
+                                  control: CGPoint(x: el.endPoint.x,   y: el.endPoint.y  ))
                 break
-            case .AddCurveToPoint:
-                CGPathAddCurveToPoint(path, nil, ctrl1.x, ctrl1.y, ctrl2.x, ctrl2.y, endPoint.x, endPoint.y)
+            case .addCurveToPoint:
+                path.addCurve(to:       CGPoint(x: el.ctrlPoint1.x, y: el.ctrlPoint1.y),
+                              control1: CGPoint(x: el.ctrlPoint2.x, y: el.ctrlPoint2.y),
+                              control2: CGPoint(x: el.endPoint.x,   y: el.endPoint.y  ))
                 break
-            case .CloseSubpath:
-                CGPathCloseSubpath(path)
+            case .closeSubpath:
+                path.closeSubpath()
                 break
-            case .Invalid:
+            case .invalid:
                 break
             }
         }
@@ -55,13 +58,13 @@ public struct Path {
 
 
 extension Path {
-    public init?(JSON: NSData) {
+    public init?(json: Data) {
         do {
-            let obj = try NSJSONSerialization.JSONObjectWithData(JSON, options: NSJSONReadingOptions(rawValue: 0))
+            let obj = try JSONSerialization.jsonObject(with: json, options: JSONSerialization.ReadingOptions(rawValue: 0))
             if let arr = obj as? [[String: AnyObject]] {
-                self.elements = arr.map({ el in
+                self.elements = arr.map { el in
                     return Element(dictionary: el)
-                })
+                }
             }
         } catch {
             return nil
@@ -69,8 +72,8 @@ extension Path {
     }
     
     public init(data: [[String: AnyObject]]) {
-        self.elements = data.map({ el in
+        self.elements = data.map { el in
             return Element(dictionary: el)
-        })
+        }
     }
 }

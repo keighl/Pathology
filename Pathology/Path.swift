@@ -12,56 +12,56 @@ import QuartzCore
 public struct Path {
     var elements: [Element] = []
     
-    public func toArray() -> [[String: AnyObject]] {
-        return elements.map({el in
-            return el.toDictionary()
-        })
+    public var array: [[String: Any]] {
+        return elements.map { $0.dictionary }
     }
     
-    public func toJSON(options: NSJSONWritingOptions) throws -> NSData {
-        let data = try NSJSONSerialization.dataWithJSONObject(toArray(), options: options)
-        return data
+    public var json: Data? {
+        try? json(options: .init(rawValue: 0))
     }
     
-    public func CGPath() -> QuartzCore.CGPath {
-        let path = CGPathCreateMutable()
-        for el in elements {
-            let endPoint = el.endPoint()
-            let ctrl1 = el.ctrlPoint1()
-            let ctrl2 = el.ctrlPoint2()
-            
-            switch el.type {
-            case .MoveToPoint:
-                CGPathMoveToPoint(path, nil, endPoint.x, endPoint.y)
-            case .AddLineToPoint:
-                CGPathAddLineToPoint(path, nil, endPoint.x, endPoint.y)
-                break
-            case .AddQuadCurveToPoint:
-                CGPathAddQuadCurveToPoint(path, nil, ctrl1.x, ctrl1.y, endPoint.x, endPoint.y)
-                break
-            case .AddCurveToPoint:
-                CGPathAddCurveToPoint(path, nil, ctrl1.x, ctrl1.y, ctrl2.x, ctrl2.y, endPoint.x, endPoint.y)
-                break
-            case .CloseSubpath:
-                CGPathCloseSubpath(path)
-                break
-            case .Invalid:
+    public func json(options: JSONSerialization.WritingOptions = []) throws -> Data {
+        try JSONSerialization.data(withJSONObject: array, options: options)
+    }
+    
+    public var cgPath: CGPath {
+        let path = CGMutablePath()
+        
+        for element in elements {
+            switch element.type {
+            case .moveToPoint:
+                path.move(to: element.endPoint)
+            case .addLineToPoint:
+                path.addLine(to: element.endPoint)
+            case .addQuadCurveToPoint:
+                path.addQuadCurve(
+                    to: element.endPoint,
+                    control: element.ctrlPoint1)
+            case .addCurveToPoint:
+                path.addCurve(
+                    to: element.endPoint,
+                    control1: element.ctrlPoint1,
+                    control2: element.ctrlPoint2)
+            case .closeSubpath:
+                path.closeSubpath()
+            case .invalid:
                 break
             }
         }
+        
         return path
     }
 }
 
 
 extension Path {
-    public init?(JSON: NSData) {
+    public init?(json: Data) {
         do {
-            let obj = try NSJSONSerialization.JSONObjectWithData(JSON, options: NSJSONReadingOptions(rawValue: 0))
+            let obj = try JSONSerialization.jsonObject(with: json, options: JSONSerialization.ReadingOptions(rawValue: 0))
             if let arr = obj as? [[String: AnyObject]] {
-                self.elements = arr.map({ el in
+                self.elements = arr.map { el in
                     return Element(dictionary: el)
-                })
+                }
             }
         } catch {
             return nil
@@ -69,8 +69,8 @@ extension Path {
     }
     
     public init(data: [[String: AnyObject]]) {
-        self.elements = data.map({ el in
+        self.elements = data.map { el in
             return Element(dictionary: el)
-        })
+        }
     }
 }

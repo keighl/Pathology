@@ -9,7 +9,7 @@
 import Foundation
 import QuartzCore
 
-public enum ElementType : String {
+public enum ElementType : String, Codable {
     case invalid
     case moveToPoint = "move"
     case addLineToPoint = "line"
@@ -18,19 +18,15 @@ public enum ElementType : String {
     case closeSubpath = "close"
 }
 
-public struct Element {
+public struct Element: Codable {
     var type: ElementType = .invalid
     var points: [CGPoint] = []
     
     public var dictionary: [String: Any] {
         return [
             "type": type.rawValue as Any,
-            "pts": points.map { [$0.x, $0.y] }
+            "points": points.map { [$0.x, $0.y] }
         ]
-    }
-    
-    public func toJSON(options: JSONSerialization.WritingOptions = []) throws -> Data {
-        try JSONSerialization.data(withJSONObject: dictionary, options: options)
     }
     
     public var endPoint: CGPoint {
@@ -65,7 +61,7 @@ extension Element {
                 self.type = ptype
         }
         
-        if let points = dictionary["pts"] as? [[CGFloat]] {
+        if let points = dictionary["points"] as? [[CGFloat]] {
             self.points = points.map { CGPoint(x: $0[0], y: $0[1]) }
         }
     }

@@ -9,19 +9,11 @@
 import Foundation
 import QuartzCore
 
-public struct Path {
+public struct Path: Codable {
     var elements: [Element] = []
     
     public var array: [[String: Any]] {
         return elements.map { $0.dictionary }
-    }
-    
-    public var json: Data? {
-        try? json(options: .init(rawValue: 0))
-    }
-    
-    public func json(options: JSONSerialization.WritingOptions = []) throws -> Data {
-        try JSONSerialization.data(withJSONObject: array, options: options)
     }
     
     public var cgPath: CGPath {
@@ -54,23 +46,8 @@ public struct Path {
 }
 
 
-extension Path {
-    public init?(json: Data) {
-        do {
-            let obj = try JSONSerialization.jsonObject(with: json, options: JSONSerialization.ReadingOptions(rawValue: 0))
-            if let arr = obj as? [[String: AnyObject]] {
-                self.elements = arr.map { el in
-                    return Element(dictionary: el)
-                }
-            }
-        } catch {
-            return nil
-        }
-    }
-    
+extension Path {    
     public init(data: [[String: AnyObject]]) {
-        self.elements = data.map { el in
-            return Element(dictionary: el)
-        }
+        self.elements = data.map { Element(dictionary: $0) }
     }
 }
